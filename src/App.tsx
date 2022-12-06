@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import { CustomerLocation } from "./pages/CustomerLocation";
-import { CustomersTable } from "./pages/CustomersTable";
+import { CustomersTable } from "./pages/UsersTable";
 import { Dashboard } from "./pages/Dashboard";
 import { Packages } from "./pages/Packages";
 import { Settings } from "./pages/Settings";
 import { Sidebar } from "./components/Sidebar";
+import { CustomerLocation } from "./pages/UserLocation";
 
 function App() {
   return (
