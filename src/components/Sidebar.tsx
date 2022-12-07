@@ -37,17 +37,13 @@ export const Sidebar = () => {
       </div>
       {/* User Avatar & User Name */}
       <div className="flex flex-col items-center p-4 my-6 gap-y-2">
-        <Avatar
-          radius="xl"
-          size="xl"
-          src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80"
-        />
+        <Avatar radius="xl" size="xl" />
         <Text className="font-bold text-xl text-white">Oguz</Text>
       </div>
       {/* Rotation Links */}
       <div className="flex flex-col items-stretch gap-y-4">
-        {pages.map((page) => (
-          <NavLink to={page.path} className="link">
+        {pages.map((page, index) => (
+          <NavLink key={index} to={page.path}>
             <div className="flex gap-x-2 gap-y-4 p-2 items-center justify-stretch hover:bg-zinc-200 hover:bg-opacity-30 text-2xl text-gray-400 focus:text-white rounded-xl">
               {page.icon}
               {page.title}
