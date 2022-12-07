@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { CustomersTable } from "./pages/UsersTable";
+import { UsersTable } from "./pages/UsersTable";
 import { Dashboard } from "./pages/Dashboard";
 import { Packages } from "./pages/Packages";
 import { Settings } from "./pages/Settings";
@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/customerLocation" element={<CustomerLocation />} />
-        <Route path="/customersTable" element={<CustomersTable />} />
+        <Route path="/customers" element={<UsersTable />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
