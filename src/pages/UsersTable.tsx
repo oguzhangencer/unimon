@@ -18,9 +18,12 @@ import { Filter, fuzzyFilter } from "../components/TableFilter";
 import { IUsers } from "../types/interfaces";
 import { getUsers } from "../utils/users";
 import { BsSortAlphaDown, BsSortAlphaUpAlt } from "react-icons/bs";
+import moment from "moment";
 
 export const UsersTable = () => {
   const { isLoading, isError, data, error } = useQuery("users", getUsers);
+
+  if (isLoading) return <div>Loading...</div>;
 
   const rerender = useReducer(() => ({}), {})[1];
 
@@ -52,7 +55,7 @@ export const UsersTable = () => {
     }),
     columnHelper.accessor("createDate", {
       header: () => "Created Date",
-      cell: (info) => info.renderValue(),
+      cell: (info) => moment(info.renderValue()).format("lll"),
     }),
   ];
 
@@ -81,21 +84,22 @@ export const UsersTable = () => {
     debugColumns: false,
   });
 
-  const pageSizes = table.getState().pagination.pageSize;
-
-  if (isLoading) return <div>Loading...</div>;
-
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mx-auto p-2">
       <div className="flex justify-center overflow-x-auto rounded-xl">
         <ScrollArea offsetScrollbars>
-          <table>
-            <thead>
+          {/* Customers Table */}
+          <table className="w-full items-center justify-center text-sm text-black-500 rounded-lg ">
+            {/* Table Head */}
+            <thead className="text-lg  rounded-xl text-white  bg-gray-100 dark:bg-slate-800 items-center justify-center">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <th key={header.id} colSpan={header.colSpan}>
+                      <th
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        className="font-body py-2 px-4  items-center text-md tracking-wide justify-center">
                         {header.isPlaceholder ? null : (
                           <>
                             <div
@@ -116,7 +120,7 @@ export const UsersTable = () => {
                               }[header.column.getIsSorted() as string] ?? null}
                             </div>
                             {header.column.getCanFilter() ? (
-                              <div>
+                              <div className="flex items-center justify-center">
                                 <Filter column={header.column} table={table} />
                               </div>
                             ) : null}
@@ -128,13 +132,18 @@ export const UsersTable = () => {
                 </tr>
               ))}
             </thead>
+            {/* Table Body */}
             <tbody>
               {table.getRowModel().rows.map((row) => {
                 return (
-                  <tr key={row.id}>
+                  <tr
+                    key={row.id}
+                    className="bg-white border-b hover:bg-gray-100 ">
                     {row.getVisibleCells().map((cell) => {
                       return (
-                        <td key={cell.id}>
+                        <td
+                          key={cell.id}
+                          className="font-body py-3 px-2 text-lg items-center justify-start">
                           {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
@@ -149,7 +158,7 @@ export const UsersTable = () => {
           </table>
         </ScrollArea>
       </div>
-
+      {/* Pagination and PageSize */}
       <div className="flex justify-center flex-row items-center p-2 gap-x-2">
         {/* <Select
           className="w-20"
@@ -169,38 +178,41 @@ export const UsersTable = () => {
           ))}
         </select>
 
-        <Button
-          radius="md"
-          variant="outline"
-          className="border-2"
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}>
-          {"<<"}
-        </Button>
-        <Button
-          radius="md"
-          variant="outline"
-          className="border-2"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}>
-          {"<"}
-        </Button>
-        <Button
-          radius="md"
-          variant="outline"
-          className="border-2"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}>
-          {">"}
-        </Button>
-        <Button
-          radius="md"
-          variant="outline"
-          className="border-2"
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}>
-          {">>"}
-        </Button>
+        <div className="flex items-center">
+          <Button
+            radius="md"
+            variant="outline"
+            color="slate"
+            className="border-2 text-slate-800 border-slate-800"
+            onClick={() => table.setPageIndex(0)}
+            disabled={!table.getCanPreviousPage()}>
+            {"<<"}
+          </Button>
+          <Button
+            radius="md"
+            variant="outline"
+            className="border-2 border-slate-800"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}>
+            {"<"}
+          </Button>
+          <Button
+            radius="md"
+            variant="outline"
+            className="border-2 border-slate-800"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}>
+            {">"}
+          </Button>
+          <Button
+            radius="md"
+            variant="outline"
+            className="border-2 border-slate-800"
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            disabled={!table.getCanNextPage()}>
+            {">>"}
+          </Button>
+        </div>
       </div>
     </div>
   );
