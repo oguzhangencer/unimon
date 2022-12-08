@@ -5,6 +5,7 @@ export interface IUsers {
   lat: number;
   lng: number;
   email: string;
-  crateDate: Date;
+  createDate: Date;
   teamName: string;
+  package: string;
 }
