@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UsersTable } from "./pages/UsersTable";
 import { Dashboard } from "./pages/Dashboard";
 import { Packages } from "./pages/Packages";
@@ -8,7 +8,7 @@ import { CustomerLocation } from "./pages/UserLocation";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Sidebar />
       <Routes>
         <Route path="/" element={<Dashboard />} />
@@ -18,7 +18,7 @@ function App() {
         <Route path="/packages" element={<Packages />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 
