@@ -1,4 +1,4 @@
-export interface Users {
+export interface IUsers {
   id: number;
   firstName: string;
   lastName: string;
@@ -9,8 +9,8 @@ export interface Users {
   teamName: string;
 }
 
-export interface UseGetUsers {
-  data: Users[];
+export interface IUseGetUsers {
+  data: IUsers[];
   isError: boolean;
   error: Error | null;
   isLoading: boolean;
