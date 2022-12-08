@@ -8,10 +8,3 @@ export interface IUsers {
   crateDate: Date;
   teamName: string;
 }
-
-export interface IUseGetUsers {
-  data: IUsers[];
-  isError: boolean;
-  error: Error | null;
-  isLoading: boolean;
-}
