@@ -1,11 +1,35 @@
+// export interface IName {
+//   firstName: string;
+//   lastName: string;
+// }
+
+export interface IGeo {
+  lat: string;
+  lng: string;
+}
+
 export interface IUsers {
-  id: number;
-  firstName: string;
-  lastName: string;
-  lat: number;
-  lng: number;
+  name: string;
   email: string;
   createDate: Date;
   teamName: string;
-  package: string;
+  geo: IGeo;
+  id: string;
+}
+
+export interface IAddress {
+  city: string;
+  state: string;
+  country: string;
+  zipCode: string;
+}
+
+export interface IAuth {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: IAddress;
+  password: string;
+  id: string;
 }
