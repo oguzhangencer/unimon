@@ -11,7 +11,7 @@ export interface IGeo {
 export interface IUsers {
   name: string;
   email: string;
-  createDate: Date;
+  createDate: string;
   teamName: string;
   geo: IGeo;
   id: string;
