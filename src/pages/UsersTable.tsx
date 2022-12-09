@@ -87,9 +87,9 @@ export const UsersTable = () => {
       <div className="flex justify-center overflow-x-auto rounded-xl">
         <ScrollArea offsetScrollbars>
           {/* Customers Table */}
-          <table className="w-full items-center justify-center text-sm text-black-500 rounded-lg ">
+          <table className="w-full items-center justify-center text-sm text-black-500">
             {/* Table Head */}
-            <thead className="text-lg  rounded-xl text-white  bg-gray-100 dark:bg-slate-800 items-center justify-center">
+            <thead className="text-lg  rounded-xl text-white  bg-slate-800 items-center justify-center">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -169,7 +169,7 @@ export const UsersTable = () => {
           onChange={(e) => {
             table.setPageSize(Number(e.target.value));
           }}>
-          {[10, 20, 30, 40, 50].map((pageSize) => (
+          {[5, 10, 20, 50, 100].map((pageSize) => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>
