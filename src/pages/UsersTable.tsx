@@ -14,7 +14,7 @@ import {
 } from "@tanstack/react-table";
 import { useReducer, useState } from "react";
 import { useQuery } from "react-query";
-import { Filter, fuzzyFilter } from "../components/TableFilter";
+import { DebouncedInput, Filter, fuzzyFilter } from "../components/TableFilter";
 import { IUsers } from "../types/interfaces";
 import { getUsers } from "../utils/users";
 import { BsSortAlphaDown, BsSortAlphaUpAlt } from "react-icons/bs";
@@ -29,12 +29,8 @@ export const UsersTable = () => {
   const columnHelper = createColumnHelper<IUsers>();
 
   const columns = [
-    columnHelper.accessor("firstName", {
-      header: () => "First Name",
-      cell: (info) => info.renderValue(),
-    }),
-    columnHelper.accessor("lastName", {
-      header: () => "Last Name",
+    columnHelper.accessor("name", {
+      header: () => "Name",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("email", {
@@ -43,10 +39,6 @@ export const UsersTable = () => {
     }),
     columnHelper.accessor("teamName", {
       header: () => "Team Name",
-      cell: (info) => info.renderValue(),
-    }),
-    columnHelper.accessor("package", {
-      header: () => "Package",
       cell: (info) => info.renderValue(),
     }),
     columnHelper.accessor("createDate", {
@@ -83,8 +75,14 @@ export const UsersTable = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col mx-auto p-2">
-      <div className="flex justify-center overflow-x-auto rounded-xl">
+    <div className="flex flex-col justify-center items-center mx-auto p-2 gap-y-6">
+      <DebouncedInput
+        value={globalFilter ?? ""}
+        onChange={(value) => setGlobalFilter(String(value))}
+        className="flex max-w-fit "
+        placeholder="Search all columns..."
+      />
+      <div className="flex justify-center rounded-xl">
         <ScrollArea offsetScrollbars>
           {/* Customers Table */}
           <table className="w-full items-center justify-center text-sm text-black-500">
