@@ -1,4 +1,4 @@
-import { Button, ScrollArea } from "@mantine/core";
+import { Pagination, ScrollArea } from "@mantine/core";
 import {
   ColumnFiltersState,
   createColumnHelper,
@@ -22,10 +22,6 @@ import moment from "moment";
 
 export const UsersTable = () => {
   const { isLoading, isError, data, error } = useQuery("users", getUsers);
-
-  if (isLoading) return <div>Loading...</div>;
-
-  const rerender = useReducer(() => ({}), {})[1];
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -83,6 +79,8 @@ export const UsersTable = () => {
     debugHeaders: true,
     debugColumns: false,
   });
+
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col mx-auto p-2">
@@ -178,41 +176,12 @@ export const UsersTable = () => {
           ))}
         </select>
 
-        <div className="flex items-center">
-          <Button
-            radius="md"
-            variant="outline"
-            color="slate"
-            className="border-2 text-slate-800 border-slate-800"
-            onClick={() => table.setPageIndex(0)}
-            disabled={!table.getCanPreviousPage()}>
-            {"<<"}
-          </Button>
-          <Button
-            radius="md"
-            variant="outline"
-            className="border-2 border-slate-800"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}>
-            {"<"}
-          </Button>
-          <Button
-            radius="md"
-            variant="outline"
-            className="border-2 border-slate-800"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}>
-            {">"}
-          </Button>
-          <Button
-            radius="md"
-            variant="outline"
-            className="border-2 border-slate-800"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-            disabled={!table.getCanNextPage()}>
-            {">>"}
-          </Button>
-        </div>
+        <Pagination
+          page={table.getState().pagination.pageIndex}
+          onChange={table.setPageIndex}
+          total={table.getPageCount()}
+          withEdges
+        />
       </div>
     </div>
   );
