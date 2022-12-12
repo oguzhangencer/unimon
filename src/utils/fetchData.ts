@@ -19,3 +19,9 @@ export const putPackages = async ({ id }: { id: string }) => {
   const response = await axios.put(`${PutPackages}${id}`);
   return response.data;
 };
+
+// Fetching Auth
+export const putAuth = async ({ id }: { id: string }) => {
+  const response = await axios.put(GetUsers);
+  return response.data;
+};
