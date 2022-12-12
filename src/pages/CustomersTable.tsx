@@ -82,10 +82,10 @@ export const CustomersTable = () => {
         className="flex max-w-fit "
         placeholder="Search all columns..."
       />
-      <div className="flex justify-center rounded-xl">
+      <div className="flex rounded-xl">
         <ScrollArea offsetScrollbars>
           {/* Customers Table */}
-          <table className="w-full items-center justify-center text-sm text-black-500">
+          <table className="w-full text-sm text-black-500">
             {/* Table Head */}
             <thead className="text-lg  rounded-xl text-white  bg-slate-800 items-center justify-center">
               {table.getHeaderGroups().map((headerGroup) => (

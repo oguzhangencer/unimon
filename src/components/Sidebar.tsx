@@ -29,7 +29,7 @@ export const Sidebar = () => {
     },
   ];
   return (
-    <div className="flex flex-col fixed items-center top-0 bottom-0 left-0 p-2 w-[250px] bg-slate-800">
+    <div className="flex flex-col items-center top-0 bottom-0 left-0 p-2 w-[250px] h-screen bg-slate-800">
       {/* UniMon Header */}
       {/* TODO: Add Icon or Png for UniMon Logo */}
       <Text className="flex p-4 font-semibold text-4xl text-white">
