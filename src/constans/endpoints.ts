@@ -1,2 +1,4 @@
 export const GetUsers = "/users";
-// export const PutAuth = `/auth/${id}`;
+export const GetPackages = "/packages/";
+export const PutPackages = "/packages/";
+export const PutAuth = `/auth/`;
