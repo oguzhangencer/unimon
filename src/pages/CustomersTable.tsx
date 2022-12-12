@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { DebouncedInput, Filter, fuzzyFilter } from "../components/TableFilter";
 import { IUsers } from "../types/interfaces";
-import { getUsers } from "../utils/users";
+import { getUsers } from "../utils/fetchData";
 import { BsSortAlphaDown, BsSortAlphaUpAlt } from "react-icons/bs";
 import moment from "moment";
 
@@ -79,7 +79,7 @@ export const CustomersTable = () => {
       <DebouncedInput
         value={globalFilter ?? ""}
         onChange={(value) => setGlobalFilter(String(value))}
-        className="flex max-w-fit "
+        className="flex max-w-fit"
         placeholder="Search all columns..."
       />
       <div className="flex rounded-xl">
