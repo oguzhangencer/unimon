@@ -10,6 +10,12 @@ export const getUsers = async () => {
 
 // Fetching Packages
 export const getPackages = async () => {
-  const response = await axios.get(PutPackages);
+  const response = await axios.get(GetPackages);
+  return response.data;
+};
+
+// Update Packages
+export const putPackages = async ({ id }: { id: string }) => {
+  const response = await axios.put(`${PutPackages}${id}`);
   return response.data;
 };
