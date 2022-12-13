@@ -1,7 +1,5 @@
-import { Text } from "@mantine/core";
 import { useQuery } from "react-query";
-import { TierOne } from "../components/TierOne";
-import { IPackages } from "../types/interfaces";
+import { FreePackage } from "../components/FreePackage";
 import { getPackages } from "../utils/fetchData";
 
 export const Packages = () => {
@@ -11,7 +9,7 @@ export const Packages = () => {
   return (
     <div className="flex gap-y-6">
       {/* Packages */}
-      <TierOne />
+      <FreePackage />
     </div>
   );
 };
