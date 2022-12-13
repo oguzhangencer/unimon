@@ -11,7 +11,7 @@ export const StarterPackage = () => {
   return (
     <div>
       {data
-        ?.filter((item: IPackages) => item?.name === "Tier 2")
+        ?.filter((item: IPackages) => item?.name === "Starter")
         .map((item: IPackages, index: number) => (
           <div key={index}>
             {/* Headers */}
@@ -22,13 +22,21 @@ export const StarterPackage = () => {
             <div>
               <Text key={index}>{item?.monitors} monitors</Text>
               <Text key={index}>{item?.users} user</Text>
-              <Text key={index}>{item?.statusPage} status page</Text>
-              <Text key={index}>{item?.integrations} integration</Text>
-              <Text key={index}>{item?.logRetention} months log retention</Text>
+              <Text key={index}>{item?.statusPage} status pages</Text>
+              <Text key={index}>{item?.integrations} integrations</Text>
+              <Text key={index}>{item?.logRetention} year log retention</Text>
             </div>
             {/* Includes */}
             <div>
               <Checkbox.Group
+                defaultValue={[
+                  item?.screenShot,
+                  item?.ssl,
+                  item?.url,
+                  item?.lightHouse,
+                  item?.domainExpiration,
+                  item?.advancedRequest,
+                ]}
                 orientation="vertical"
                 label="Includes"
                 withAsterisk
