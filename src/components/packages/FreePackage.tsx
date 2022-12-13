@@ -11,7 +11,7 @@ export const FreePackage = () => {
   return (
     <div>
       {data
-        ?.filter((item: IPackages) => item?.name === "Tier 1")
+        ?.filter((item: IPackages) => item?.name === "Free")
         .map((item: IPackages, index: number) => (
           <div key={index}>
             {/* Headers */}
@@ -29,6 +29,13 @@ export const FreePackage = () => {
             {/* Includes */}
             <div>
               <Checkbox.Group
+                defaultValue={[
+                  item?.uptime,
+                  item?.ping,
+                  item?.tcp,
+                  item?.dns,
+                  item?.text,
+                ]}
                 orientation="vertical"
                 label="Includes"
                 withAsterisk
