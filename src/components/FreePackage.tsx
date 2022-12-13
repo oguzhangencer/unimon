@@ -3,7 +3,7 @@ import { getPackages } from "../utils/fetchData";
 import { Checkbox, Text } from "@mantine/core";
 import { IPackages } from "../types/interfaces";
 
-export const TierOne = () => {
+export const FreePackage = () => {
   const { isLoading, isError, data, error } = useQuery("packages", getPackages);
 
   if (isLoading) return <div>Loading...</div>;
@@ -40,7 +40,7 @@ export const TierOne = () => {
                 <Checkbox value={item?.tcp} label={item?.tcp} />
                 <Checkbox value={item?.dns} label={item?.dns} />
                 <Checkbox value={item?.text} label={item?.text} />
-                {/* Selectable */}
+                {/* Selectable Includes */}
                 <Checkbox value={item?.screenShot} label={item?.screenShot} />
                 <Checkbox value={item?.ssl} label={item?.ssl} />
                 <Checkbox value={item?.url} label={item?.url} />
