@@ -51,6 +51,7 @@ export interface IPackages {
   text: string;
   screenShot: string;
   ssl: string;
+  url: string;
   lightHouse: string;
   domainExpiration: string;
   advancedRequest: string;
