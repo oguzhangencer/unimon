@@ -1,28 +1,17 @@
 import { Text } from "@mantine/core";
+import { useQuery } from "react-query";
+import { TierOne } from "../components/TierOne";
+import { IPackages } from "../types/interfaces";
+import { getPackages } from "../utils/fetchData";
 
 export const Packages = () => {
+  const { isLoading, isError, data, error } = useQuery("packages", getPackages);
+
+  if (isLoading) return <div>Loading...</div>;
   return (
-    <div className="flex">
-      {/* Package 1 */}
-      <div className="flex flex-col">
-        {/* Header */}
-        <div></div>
-        {/* Feauters */}
-        <div></div>
-        {/* Includes */}
-        <div>
-          <Text>Includes</Text>
-        </div>
-      </div>
-
-      {/* Package 2 */}
-      <div className="flex flex-col"></div>
-
-      {/* Package 3 */}
-      <div className="flex flex-col"></div>
-
-      {/* Package 4 */}
-      <div className="flex flex-col"></div>
+    <div className="flex gap-y-6">
+      {/* Packages */}
+      <TierOne />
     </div>
   );
 };
