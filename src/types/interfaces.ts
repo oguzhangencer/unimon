@@ -8,7 +8,7 @@ export interface IGeo {
   lng: string;
 }
 
-export interface IUsers {
+export interface ICustomers {
   name: string;
   email: string;
   createDate: string;
