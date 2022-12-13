@@ -1,4 +1,4 @@
-import { Pagination, ScrollArea } from "@mantine/core";
+import { Loader, Pagination, ScrollArea, Notification } from "@mantine/core";
 import {
   ColumnFiltersState,
   createColumnHelper,
@@ -12,21 +12,25 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { BiError } from "react-icons/bi";
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { DebouncedInput, Filter, fuzzyFilter } from "../components/TableFilter";
-import { IUsers } from "../types/interfaces";
-import { getUsers } from "../utils/fetchData";
+import { ICustomers } from "../types/interfaces";
+import { getCustomers } from "../utils/fetchData";
 import { BsSortAlphaDown, BsSortAlphaUpAlt } from "react-icons/bs";
 import moment from "moment";
 
 export const CustomersTable = () => {
-  const { isLoading, isError, data, error } = useQuery("users", getUsers);
+  const { isLoading, isError, data, error } = useQuery(
+    "customers",
+    getCustomers
+  );
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
 
-  const columnHelper = createColumnHelper<IUsers>();
+  const columnHelper = createColumnHelper<ICustomers>();
 
   const columns = [
     columnHelper.accessor("name", {
@@ -47,7 +51,7 @@ export const CustomersTable = () => {
     }),
   ];
 
-  const table = useReactTable({
+  const table = useReactTable<ICustomers>({
     data,
     columns,
     filterFns: {
@@ -72,7 +76,15 @@ export const CustomersTable = () => {
     debugColumns: false,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return <Loader className="flex" size="lg" variant="bars" color="slate" />;
+
+  if (isError)
+    return (
+      <Notification icon={<BiError />} color="red">
+        Somethings went wrong...
+      </Notification>
+    );
 
   return (
     <div className="flex flex-col justify-center items-center mx-auto p-2 gap-y-6">
