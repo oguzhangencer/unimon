@@ -13,7 +13,7 @@ export const ProPackage = () => {
   if (isError)
     return (
       <Notification icon={<BiError />} color="red">
-        Somethings went wrong...
+        {`Somethings went wrong...${error}`}
       </Notification>
     );
   return (
