@@ -1,13 +1,21 @@
 import { useQuery } from "react-query";
 import { getPackages } from "../../utils/fetchData";
-import { Checkbox, Text } from "@mantine/core";
+import { Notification, Checkbox, Loader, Text } from "@mantine/core";
 import { IPackages } from "../../types/interfaces";
+import { BiError } from "react-icons/bi";
 
 export const EnterpricePackage = () => {
   const { isLoading, isError, data, error } = useQuery("packages", getPackages);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return <Loader className="flex" size="lg" variant="bars" color="slate" />;
 
+  if (isError)
+    return (
+      <Notification icon={<BiError />} color="red">
+        Somethings went wrong...
+      </Notification>
+    );
   return (
     <div>
       {data
