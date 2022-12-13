@@ -11,7 +11,7 @@ export const ProPackage = () => {
   return (
     <div>
       {data
-        ?.filter((item: IPackages) => item?.name === "Tier 3")
+        ?.filter((item: IPackages) => item?.name === "Pro")
         .map((item: IPackages, index: number) => (
           <div key={index}>
             {/* Headers */}
@@ -22,13 +22,24 @@ export const ProPackage = () => {
             <div>
               <Text key={index}>{item?.monitors} monitors</Text>
               <Text key={index}>{item?.users} user</Text>
-              <Text key={index}>{item?.statusPage} status page</Text>
-              <Text key={index}>{item?.integrations} integration</Text>
-              <Text key={index}>{item?.logRetention} months log retention</Text>
+              <Text key={index}>{item?.sms} SMS</Text>
+              <Text key={index}>{item?.voiceCall} Voice Call</Text>
+              <Text key={index}>{item?.statusPage} status pages</Text>
+              <Text key={index}>{item?.integrations} integrations</Text>
+              <Text key={index}>{item?.logRetention} years log retention</Text>
             </div>
             {/* Includes */}
             <div>
               <Checkbox.Group
+                defaultValue={[
+                  item?.sourceCode,
+                  item?.network,
+                  item?.whoIs,
+                  item?.selfHosted,
+                  item?.cookie,
+                  item?.ipBlacklist,
+                  item?.multiLocation,
+                ]}
                 orientation="vertical"
                 label="Includes"
                 withAsterisk
