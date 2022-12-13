@@ -4,7 +4,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { Packages } from "./pages/Packages";
 import { Settings } from "./pages/Settings";
 import { Sidebar } from "./components/Sidebar";
-import { CustomerLocation } from "./pages/UserLocation";
+import { CustomersLocation } from "./pages/CustomersLocation";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/customerLocation" element={<CustomerLocation />} />
+            <Route path="/customerLocation" element={<CustomersLocation />} />
             <Route path="/customers" element={<CustomersTable />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/settings" element={<Settings />} />

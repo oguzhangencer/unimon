@@ -1,3 +1,3 @@
-export const CustomerLocation = () => {
+export const CustomersLocation = () => {
   return <div>CustomerLocation</div>;
 };
