@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { FreePackage } from "../components/FreePackage";
+import { FreePackage } from "../components/packages/FreePackage";
 import { getPackages } from "../utils/fetchData";
 
 export const Packages = () => {

@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
-import { getPackages } from "../utils/fetchData";
+import { getPackages } from "../../utils/fetchData";
 import { Checkbox, Text } from "@mantine/core";
-import { IPackages } from "../types/interfaces";
+import { IPackages } from "../../types/interfaces";
 
 export const FreePackage = () => {
   const { isLoading, isError, data, error } = useQuery("packages", getPackages);
