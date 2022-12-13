@@ -1,10 +1,14 @@
-import { GetPackages, PutAuth, PutPackages } from "./../constans/endpoints";
-import { GetUsers } from "../constans/endpoints";
+import {
+  GetCustomers,
+  GetPackages,
+  PutAuth,
+  PutPackages,
+} from "./../constans/endpoints";
 import axios from "./axios";
 
 // Fetching Users
-export const getUsers = async () => {
-  const response = await axios.get(GetUsers);
+export const getCustomers = async () => {
+  const response = await axios.get(GetCustomers);
   return response.data;
 };
 
