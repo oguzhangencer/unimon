@@ -11,7 +11,7 @@ export const EnterpricePackage = () => {
   return (
     <div>
       {data
-        ?.filter((item: IPackages) => item?.name === "Tier 3")
+        ?.filter((item: IPackages) => item?.name === "Enterprice")
         .map((item: IPackages, index: number) => (
           <div key={index}>
             {/* Headers */}
@@ -31,6 +31,11 @@ export const EnterpricePackage = () => {
             {/* Includes */}
             <div>
               <Checkbox.Group
+                defaultValue={[
+                  item?.higherChek,
+                  item?.premiumSupport,
+                  item?.dedicatedAccount,
+                ]}
                 orientation="vertical"
                 label="Includes"
                 withAsterisk
