@@ -13,7 +13,7 @@ export const Sidebar = () => {
       icon: <MdSpaceDashboard />,
     },
     {
-      path: "/customers",
+      path: "/customersTable",
       title: "Customers",
       icon: <FaUserFriends />,
     },
