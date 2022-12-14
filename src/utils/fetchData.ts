@@ -1,3 +1,4 @@
+import { IPackages } from "../types/interfaces";
 import {
   GetCustomers,
   GetPackages,
@@ -19,8 +20,14 @@ export const getPackages = async () => {
 };
 
 // Update Packages
-export const putPackages = async ({ id }: { id: string }) => {
-  const response = await axios.put(`${PutPackages}${id}`);
+export const putPackages = async ({
+  id,
+  item,
+}: {
+  id: string;
+  item: IPackages;
+}) => {
+  const response = await axios.put(`${PutPackages}${id}`, item);
   return response.data;
 };
 
