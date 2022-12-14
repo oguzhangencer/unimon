@@ -34,36 +34,40 @@ export interface IAuth {
   password: string;
 }
 
+export interface IIncludes {
+  uptime: boolean;
+  ping: boolean;
+  tcp: boolean;
+  dns: boolean;
+  text: boolean;
+  screenShot: boolean;
+  ssl: boolean;
+  url: boolean;
+  lightHouse: boolean;
+  domainExpiration: boolean;
+  advancedRequest: boolean;
+  customDns: boolean;
+  sourceCode: boolean;
+  network: boolean;
+  whoIs: boolean;
+  selfHosted: boolean;
+  cookie: boolean;
+  ipBlacklist: boolean;
+  multiLocation: boolean;
+  higherChek: boolean;
+  premiumSupport: boolean;
+  dedicatedAccount: boolean;
+}
+
 export interface IPackages {
   id: string;
-  name: string;
-  monitors: string;
-  users: string;
-  sms: string;
-  voiceCall: string;
-  statusPage: string;
-  integrations: string;
-  logRetention: string;
-  uptime: string;
-  ping: string;
-  tcp: string;
-  dns: string;
-  text: string;
-  screenShot: string;
-  ssl: string;
-  url: string;
-  lightHouse: string;
-  domainExpiration: string;
-  advancedRequest: string;
-  customDns: string;
-  sourceCode: string;
-  network: string;
-  whoIs: string;
-  selfHosted: string;
-  cookie: string;
-  ipBlacklist: string;
-  multiLocation: string;
-  higherChek: string;
-  premiumSupport: string;
-  dedicatedAccount: string;
+  name: number | boolean;
+  monitors: number | boolean;
+  users: number | boolean;
+  sms: number | boolean;
+  voiceCall: number | boolean;
+  statusPage: number | boolean;
+  integrations: number | boolean;
+  logRetention: number | boolean;
+  includes: IIncludes;
 }
