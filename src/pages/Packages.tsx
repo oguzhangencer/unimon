@@ -1,4 +1,5 @@
 import { Notification, Loader, Text, Checkbox, TextInput } from "@mantine/core";
+import { useState } from "react";
 import { BiError } from "react-icons/bi";
 import { GiConsoleController } from "react-icons/gi";
 import { useMutation, useQuery, useQueryClient } from "react-query";
@@ -51,358 +52,447 @@ export const Packages = () => {
               className="flex flex-col gap-1"
               defaultValue={Object.keys(item?.includes)}
               withAsterisk> */}
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      uptime: !item?.includes?.uptime,
+            {/* Uptime */}
+            <div className="flex gap-2">
+              <Checkbox
+                disabled={editPackageMutation?.isLoading ? true : false}
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        uptime: !item?.includes?.uptime,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.uptime}
-              label="Uptime Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      ping: !item?.includes?.ping,
+                  });
+                }}
+                checked={item?.includes?.uptime}
+              />
+              <Text>Uptime Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Ping */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        ping: !item?.includes?.ping,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.ping}
-              label="Ping Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      tcp: !item?.includes?.tcp,
+                  });
+                }}
+                checked={item?.includes?.ping}
+              />
+              <Text>Ping Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* TCP */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        tcp: !item?.includes?.tcp,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.tcp}
-              label="TCP Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      dns: !item?.includes?.dns,
+                  });
+                }}
+                checked={item?.includes?.tcp}
+              />
+              <Text>TCP Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* DNS */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        dns: !item?.includes?.dns,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.dns}
-              label="DNS Record Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      text: !item?.includes?.text,
+                  });
+                }}
+                checked={item?.includes?.dns}
+              />
+              <Text>DNS Record Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/*  Text */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        text: !item?.includes?.text,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.text}
-              label="Text Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      screenShot: !item?.includes?.screenShot,
+                  });
+                }}
+                checked={item?.includes?.text}
+              />
+              <Text>Text Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Screenshot */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        screenShot: !item?.includes?.screenShot,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.screenShot}
-              label="Screenshot Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      ssl: !item?.includes?.ssl,
+                  });
+                }}
+                checked={item?.includes?.screenShot}
+              />
+              <Text>Screenshot Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* SSL */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        ssl: !item?.includes?.ssl,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.ssl}
-              label="SSL Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      url: !item?.includes?.url,
+                  });
+                }}
+                checked={item?.includes?.ssl}
+              />
+              <Text>SSL Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* URL */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        url: !item?.includes?.url,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.url}
-              label="URL Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      lightHouse: !item?.includes?.lightHouse,
+                  });
+                }}
+                checked={item?.includes?.url}
+              />
+              <Text>URL Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Lighthouse */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        lightHouse: !item?.includes?.lightHouse,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.lightHouse}
-              label="Lighthouse Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      domainExpiration: !item?.includes?.domainExpiration,
+                  });
+                }}
+                checked={item?.includes?.lightHouse}
+              />
+              <Text>Lighthouse Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Domain Expiration */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        domainExpiration: !item?.includes?.domainExpiration,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.domainExpiration}
-              label="Domain Expiration Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      advancedRequest: !item?.includes?.advancedRequest,
+                  });
+                }}
+                checked={item?.includes?.domainExpiration}
+              />
+              <Text>Domain Expiration Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Advanced Request */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        advancedRequest: !item?.includes?.advancedRequest,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.advancedRequest}
-              label="Advanced Request Features"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      customDns: !item?.includes?.customDns,
+                  });
+                }}
+                checked={item?.includes?.advancedRequest}
+              />
+              <Text>Advanced Request Features</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Custom DNS */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        customDns: !item?.includes?.customDns,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.customDns}
-              label="Custom DNS"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      sourceCode: !item?.includes?.sourceCode,
+                  });
+                }}
+                checked={item?.includes?.customDns}
+              />
+              <Text>Custom DNS</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Source Code */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        sourceCode: !item?.includes?.sourceCode,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.sourceCode}
-              label="Source Code Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      network: !item?.includes?.network,
+                  });
+                }}
+                checked={item?.includes?.sourceCode}
+              />
+              <Text>Source Code Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Network */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        network: !item?.includes?.network,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.network}
-              label="Network Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      whoIs: !item?.includes?.whoIs,
+                  });
+                }}
+                checked={item?.includes?.network}
+              />
+              <Text>Network Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Whois */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        whoIs: !item?.includes?.whoIs,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.whoIs}
-              label="Whois Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      selfHosted: !item?.includes?.selfHosted,
+                  });
+                }}
+                checked={item?.includes?.whoIs}
+              />
+              <Text>Whois Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Self Hosted */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        selfHosted: !item?.includes?.selfHosted,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.selfHosted}
-              label="Self Hosted Status Pages"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      cookie: !item?.includes?.cookie,
+                  });
+                }}
+                checked={item?.includes?.selfHosted}
+              />
+              <Text>Self Hosted</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Cookie */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        cookie: !item?.includes?.cookie,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.cookie}
-              label="Cookie Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      customDns: !item?.includes?.customDns,
+                  });
+                }}
+                checked={item?.includes?.cookie}
+              />
+              <Text>Cookie Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* IP Blacklist */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        customDns: !item?.includes?.customDns,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.ipBlacklist}
-              label="IP Blacklist Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      multiLocation: !item?.includes?.multiLocation,
+                  });
+                }}
+                checked={item?.includes?.ipBlacklist}
+              />
+              <Text>IP Blacklist Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Multi Location */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        multiLocation: !item?.includes?.multiLocation,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.multiLocation}
-              label="Multi Location Monitoring"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      higherChek: !item?.includes?.higherChek,
+                  });
+                }}
+                checked={item?.includes?.multiLocation}
+              />
+              <Text>Multi Location Monitoring</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Higher Check */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        higherChek: !item?.includes?.higherChek,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.higherChek}
-              label="Higher Check Intervals"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      premiumSupport: !item?.includes?.premiumSupport,
+                  });
+                }}
+                checked={item?.includes?.higherChek}
+              />
+              <Text>Higher Check Intervals</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Premium Support */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        premiumSupport: !item?.includes?.premiumSupport,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.premiumSupport}
-              label="Premium Support"
-            />
-            <Checkbox
-              onChange={() => {
-                editPackageMutation.mutate({
-                  id: item?.id,
-                  item: {
-                    ...item,
-                    includes: {
-                      ...item?.includes,
-                      dedicatedAccount: !item?.includes?.dedicatedAccount,
+                  });
+                }}
+                checked={item?.includes?.premiumSupport}
+              />
+              <Text>Premium Support</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
+            {/* Dedicated Account */}
+            <div className="flex gap-2">
+              <Checkbox
+                onChange={() => {
+                  editPackageMutation.mutate({
+                    id: item?.id,
+                    item: {
+                      ...item,
+                      includes: {
+                        ...item?.includes,
+                        dedicatedAccount: !item?.includes?.dedicatedAccount,
+                      },
                     },
-                  },
-                });
-              }}
-              checked={item?.includes?.dedicatedAccount}
-              label="Dedicated Account Manager"
-            />
+                  });
+                }}
+                checked={item?.includes?.dedicatedAccount}
+              />
+              <Text>Dedicated Account Manager</Text>
+              {editPackageMutation.isLoading && <Loader size="sm" />}
+            </div>
             {/* </Checkbox.Group> */}
           </div>
         </div>
